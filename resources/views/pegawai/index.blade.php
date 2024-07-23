@@ -85,17 +85,65 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">{{ $item->nama }}</h5>
+                        <h5 class="modal-title">Detail data Saudara <strong class="text-info">{{ $item->nama }}</strong>
+                        </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>Modal body text goes here.</p>
-                    </div>
-                    <div class="modal-footer bg-whitesmoke br">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <table class="table table-sm">
+                            <thead>
+                                <div class="text-center">
+                                    <img src="{{ asset('/storage/pegawai/' . $item->foto) }}" class="rounded mb-3"
+                                        style="width: 250px; height: 350px; border-radius: 100%; border: 2px solid #000000;">
+                                </div>
+                                <tr>
+                                    <th scope="col">NPK</th>
+                                    <th scope="row"><strong>{{ $item->npk }}</strong></th>
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nama</th>
+                                    <th scope="row"><strong>{{ $item->nama }}</strong></th>
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Tanggal Lahir</th>
+                                    <th scope="row">
+                                        <strong>{{ date('d-M-Y', strtotime($item->tanggal_lahir)) }}</strong>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Jenis Kelamin</th>
+                                    <th scope="row"><strong>{{ $item->jenis_kelamin }}</strong></th>
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr>
+                                    <th scope="col">No HP</th>
+                                    <th scope="row"><strong>{{ $item->nohp }}</strong></th>
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Jabatan</th>
+                                    <th scope="row"><strong>{{ $item->jabatan }}</strong></th>
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr>
+                                    <th scope="col">TMT</th>
+                                    <th scope="row">
+                                        <strong>{{ date('d-M-Y', strtotime($item->tmt)) }}</strong>
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
                 </div>
             </div>
