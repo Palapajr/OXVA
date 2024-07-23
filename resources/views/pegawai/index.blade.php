@@ -1,0 +1,140 @@
+@extends('layout.main')
+
+@section('csslibrary')
+    <link rel="stylesheet" href="/assets/modules/datatables/datatables.min.css">
+    <link rel="stylesheet" href="/assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="/assets/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css">
+    <link rel="stylesheet" href="/assets/modules/izitoast/css/iziToast.min.css">
+    <link rel="stylesheet" href="/assets/modules/prism/prism.css">
+@endsection
+
+@section('title', 'Data Pegawai')
+
+@section('content')
+    <div class="section-header">
+        <h1>@yield('title')</h1>
+        <div class="section-header-breadcrumb">
+            <a href="{{ route('pegawai.create') }}" class="btn btn-icon icon-left btn-primary"><i
+                    class="fa fa-solid fa-plus"></i>
+                Tambah Data
+            </a>
+        </div>
+    </div>
+
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+                            <table class="table table-striped" id="table-1">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>Foto</th>
+                                        <th>Nama</th>
+                                        <th>NPK</th>
+                                        <th>No Hp</th>
+                                        <th>Jabatan</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($data as $item)
+                                        <tr class="text-center">
+                                            <td>
+                                                <img src="{{ asset('/storage/pegawai/' . $item->foto) }}" class="rounded"
+                                                    style="width: 50px">
+                                                {{-- <img src="{{ asset('images') . '/' . $item->foto }}" width="50" height="50"> --}}
+                                            </td>
+                                            <td>{{ $item->nama }}</td>
+                                            <td>{{ $item->npk }}</td>
+                                            <td>{{ $item->nohp }}</td>
+                                            <td>{{ $item->jabatan }}</td>
+
+                                            <td>
+                                                {{-- <a href="{{ route('pegawai.show', $item->id) }}" class="btn btn-icon btn-info"><i class="fa fa-solid fa-eye"></i></a> --}}
+                                                <button class="btn btn-icon btn-info" data-toggle="modal"
+                                                    data-target="#exampleModal{{ $item->id }}"><i
+                                                        class="fa fa-solid fa-eye"></i></button>
+                                                <a href="" class="btn btn-icon btn-warning"><i
+                                                        class="fa fa-regular fa-pen"></i></a>
+                                                <a href="#" class="btn btn-icon btn-danger"><i
+                                                        class="fa fa-solid fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+@endsection
+@section('modal')
+    @foreach ($data as $item)
+        <!-- Modal detail-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="exampleModal{{ $item->id }}">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{ $item->nama }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Modal body text goes here.</p>
+                    </div>
+                    <div class="modal-footer bg-whitesmoke br">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end Modal detail-->
+    @endforeach
+@endsection
+
+@section('jslibrary')
+    <script src="/assets/modules/datatables/datatables.min.js"></script>
+    <script src="/assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js"></script>
+    <script src="/assets/modules/jquery-ui/jquery-ui.min.js"></script>
+    <script src="/assets/modules/izitoast/js/iziToast.min.js"></script>
+    <script src="/assets/modules/prism/prism.js"></script>
+    <script>
+        //message with toastr
+        @if (session()->has('success'))
+
+            iziToast.success({
+                title: '{{ session('success') }}',
+                position: 'topRight'
+            });
+
+            // iziToast.success('{{ session('success') }}', 'BERHASIL!');
+        @elseif (session()->has('error'))
+
+            iziToast.error('{{ session('error') }}', 'GAGAL!');
+        @endif
+    </script>
+@stop
+
+@section('datatable')
+    <script>
+        $("#table-1").dataTable({
+            "columnDefs": [{
+                "sortable": false,
+                "targets": [2, 3]
+            }]
+        });
+    </script>
+@stop
