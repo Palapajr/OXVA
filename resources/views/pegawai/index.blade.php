@@ -45,7 +45,7 @@
                                         <tr class="text-center">
                                             <td>
                                                 <img src="{{ asset('/storage/pegawai/' . $item->foto) }}" class="rounded"
-                                                    style="width: 50px">
+                                                    style="width: 80px">
                                                 {{-- <img src="{{ asset('images') . '/' . $item->foto }}" width="50" height="50"> --}}
                                             </td>
                                             <td>{{ $item->nama }}</td>
@@ -56,12 +56,14 @@
                                             <td>
                                                 {{-- <a href="{{ route('pegawai.show', $item->id) }}" class="btn btn-icon btn-info"><i class="fa fa-solid fa-eye"></i></a> --}}
                                                 <button class="btn btn-icon btn-info" data-toggle="modal"
-                                                    data-target="#exampleModal{{ $item->id }}"><i
+                                                    data-target="#detail{{ $item->id }}"><i
                                                         class="fa fa-solid fa-eye"></i></button>
-                                                <a href="" class="btn btn-icon btn-warning"><i
+                                                <a href="{{ route('pegawai.edit', $item->id) }}"
+                                                    class="btn btn-icon btn-warning"><i
                                                         class="fa fa-regular fa-pen"></i></a>
-                                                <a href="#" class="btn btn-icon btn-danger"><i
-                                                        class="fa fa-solid fa-trash"></i></a>
+                                                <button class="btn btn-icon btn-danger" data-toggle="modal"
+                                                    data-target="#hapus{{ $item->id }}"><i
+                                                        class="fa fa-solid fa-trash"></i></button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -81,7 +83,7 @@
 @section('modal')
     @foreach ($data as $item)
         <!-- Modal detail-->
-        <div class="modal fade" tabindex="-1" role="dialog" id="exampleModal{{ $item->id }}">
+        <div class="modal fade" tabindex="-1" role="dialog" id="detail{{ $item->id }}">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -149,6 +151,34 @@
             </div>
         </div>
         <!-- end Modal detail-->
+
+        <!-- Modal Hapus-->
+        <div class="modal fade" id="hapus{{ $item->id }}">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Confirmation</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Apakah anda yakin menghapus data -> <b>{{ $item->nama }} ?</b> </p>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <form action="{{ route('pegawai.destroy', $item->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-danger">Delete Data</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- end Modal Hapus-->
     @endforeach
 @endsection
 
