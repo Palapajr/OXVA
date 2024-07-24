@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,8 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('dashboard');
+// });
+
+Route::get('/dashboard', [DashboardController::class, 'index']);
 
 Route::resource('/pegawai', \App\Http\Controllers\PegawaiController::class);
+Route::resource('/jabatan', \App\Http\Controllers\JabaatanController::class);

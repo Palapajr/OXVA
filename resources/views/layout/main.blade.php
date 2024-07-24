@@ -74,8 +74,8 @@
                     </div>
                     <ul class="sidebar-menu">
                         <li class="menu-header">UTama</li>
-                        <li class="{{ Request::is('admin') ? 'active' : '' }}"><a class="nav-link"
-                                href="{{ url('/admin') }}"><i class="far fa fa-fire"></i><span>Dashboard</span></a>
+                        <li class="{{ Request::is('dashboard') ? 'active' : '' }}"><a class="nav-link"
+                                href="{{ url('/dashboard') }}"><i class="far fa fa-fire"></i><span>Dashboard</span></a>
                         </li>
 
                         <li class="menu-header">Database</li>
@@ -83,6 +83,17 @@
                         <li class="{{ Request::is('pegawai') ? 'active' : '' }}"><a class="nav-link"
                                 href="{{ url('/pegawai') }}"><i class="fas fa-user"></i>
                                 <span>Data Pegawai</span></a></li>
+
+                        <li class="dropdown {{ Request::is('jabatan') ? 'active' : '' }}">
+                            <a href="#" class="nav-link has-dropdown"><i class="fas fa-database"></i><span>Master
+                                    Data</span></a>
+                            <ul class="dropdown-menu">
+                                <li class="{{ Request::is('jabatan') ? 'active' : '' }}"><a class="nav-link"
+                                        href="{{ url('/jabatan') }}"><span>Master jabatan</span></a></li>
+                            </ul>
+                        </li>
+
+
                     </ul>
 
                     <div class="mt-4 mb-4 p-3 hide-sidebar-mini">

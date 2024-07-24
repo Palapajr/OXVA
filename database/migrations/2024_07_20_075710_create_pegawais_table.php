@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('tanggal_lahir');
             $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']);
             $table->string('nohp');
-            $table->string('jabatan');
+            $table->foreignId('jabatan_id')->constrained('jabatans');
             $table->date('tmt'); // tanggal mulai bekerja
             $table->string('foto')->nullable();
             $table->timestamps();

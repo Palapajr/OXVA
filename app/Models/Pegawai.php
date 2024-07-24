@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Jabatan;
 
 class Pegawai extends Model
 {
+    protected $table = 'pegawais';
 
     use HasFactory;
     protected $fillable = [
@@ -19,4 +21,9 @@ class Pegawai extends Model
         'tmt',
         'foto',
     ];
+
+    public function jabatan()
+    {
+        return $this->belongsTo(Jabatan::class);
+    }
 }
