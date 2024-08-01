@@ -4,21 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Pegawai;
 
-class Jabatan extends Model
+class Lokasi extends Model
 {
     use HasFactory;
-    protected $table = "jabatans";
+    protected $table = 'lokasis';
     protected $primaryKey = "id";
 
     protected $fillable = [
         'id',
-        'nama_jabatan',
+        'nama_lokasi',
     ];
-
-    public function pegawais()
-    {
-        return $this->hasMany(Pegawai::class);
-    }
 }

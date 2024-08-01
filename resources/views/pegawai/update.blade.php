@@ -88,9 +88,16 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Jabatan</label>
-                                    <input type="text" class="form-control @error('jabatan') is-invalid @enderror"
-                                        name="jabatan" value="{{ old('jabatan', $data->jabatan) }}">
-                                    @error('jabatan')
+                                    <select class="form-control @error('jabatan_id') is-invalid @enderror" name="jabatan_id">
+                                        <option>Silakan pilih</option>
+                                        @foreach ($jabatan as $item)
+                                          <option value="{{ $item->id }}"
+                                            {{ old('jabatan_id', isset($data) ? $data->jabatan_id : '') == $item->id ? 'selected' : '' }}>
+                                            {{ $item->nama_jabatan }}
+                                          </option>
+                                       @endforeach
+                                    </select>
+                                    @error('jabatan_id')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>

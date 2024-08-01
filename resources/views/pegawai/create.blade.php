@@ -84,6 +84,42 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Jabatan</label>
+                                    <select name="jabatan_id" class="form-control @error('jabatan_id') is-invalid @enderror"  value="{{ old('jabatan_id') }}">
+                                        <option>Silakan pilih</option>
+                                        @foreach ($jabatan as $item)
+                                          <option value="{{ $item->id }}"
+                                            {{ old('jabatan_id', isset($data) ? $data->jabatan_id : '') == $item->id ? 'selected' : '' }}>
+                                            {{ $item->nama_jabatan }}
+                                          </option>
+                                        @endforeach
+                                    </select>
+                                    @error('jabatan_id')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                {{-- <div class="form-group">
+                                    <label>Jabatan</label>
+                                    <select class="form-control @error('jabatan') is-invalid @enderror"
+                                        name="jabatan" value="{{ old('jabatan') }}">
+                                        <option>Silakan pilih</option>
+                                        @foreach ($jabatan as $jabatan)
+                                          <option value="{{ $jabatan->id }}"
+                                             {{ isset($data) ? ($jabatan->id == $data->id ? 'selected' : '') : '' }}>
+                                             {{ $jabatan->nama_jabatan }}
+                                          </option>
+                                       @endforeach
+                                    </select>
+                                    @error('jabatan')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div> --}}
+                                {{-- <div class="form-group">
+                                    <label>Jabatan</label>
+
                                     <input type="text" class="form-control @error('jabatan') is-invalid @enderror"
                                         name="jabatan" value="{{ old('jabatan') }}">
                                     @error('jabatan')
@@ -91,7 +127,7 @@
                                             {{ $message }}
                                         </div>
                                     @enderror
-                                </div>
+                                </div> --}}
                                 <div class="form-group">
                                     <label>TMT</label>
                                     <input type="date" class="form-control @error('tmt') is-invalid @enderror"

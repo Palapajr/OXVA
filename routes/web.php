@@ -22,3 +22,5 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 
 Route::resource('/pegawai', \App\Http\Controllers\PegawaiController::class);
 Route::resource('/jabatan', \App\Http\Controllers\JabaatanController::class);
+Route::resource('/satuan', \App\Http\Controllers\SatuanController::class);
+Route::resource('/lokasi', \App\Http\Controllers\LokasiController::class);

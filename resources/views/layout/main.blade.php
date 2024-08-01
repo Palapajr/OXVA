@@ -80,16 +80,24 @@
 
                         <li class="menu-header">Database</li>
 
-                        <li class="{{ Request::is('pegawai') ? 'active' : '' }}"><a class="nav-link"
+                        <li class="{{ Request::is('pegawai') ? 'active' : '' }} || {{ Request::is('pegawai/create') ? 'active' : '' }} || {{ Request::is('pegawai/*/edit') ? 'active' : '' }}"><a class="nav-link"
                                 href="{{ url('/pegawai') }}"><i class="fas fa-user"></i>
                                 <span>Data Pegawai</span></a></li>
 
-                        <li class="dropdown {{ Request::is('jabatan') ? 'active' : '' }}">
+                        <li class="dropdown {{ Request::is('jabatan') ? 'active' : '' }} || {{ Request::is('satuan') ? 'active' : '' }} || {{ Request::is('lokasi') ? 'active' : '' }}">
                             <a href="#" class="nav-link has-dropdown"><i class="fas fa-database"></i><span>Master
                                     Data</span></a>
                             <ul class="dropdown-menu">
                                 <li class="{{ Request::is('jabatan') ? 'active' : '' }}"><a class="nav-link"
-                                        href="{{ url('/jabatan') }}"><span>Master jabatan</span></a></li>
+                                        href="{{ url('/jabatan') }}"><span>Master Jabatan</span></a></li>
+                            </ul>
+                            <ul class="dropdown-menu">
+                                <li class="{{ Request::is('satuan') ? 'active' : '' }}"><a class="nav-link"
+                                        href="{{ url('/satuan') }}"><span>Master Satuan</span></a></li>
+                            </ul>
+                            <ul class="dropdown-menu">
+                                <li class="{{ Request::is('lokasi') ? 'active' : '' }}"><a class="nav-link"
+                                        href="{{ url('/lokasi') }}"><span>Master Lokasi</span></a></li>
                             </ul>
                         </li>
 

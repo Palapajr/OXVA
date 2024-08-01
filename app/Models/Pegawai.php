@@ -8,16 +8,17 @@ use App\Models\Jabatan;
 
 class Pegawai extends Model
 {
-    protected $table = 'pegawais';
-
     use HasFactory;
+    protected $table = 'pegawais';
+    protected $primaryKey = "id";
+
     protected $fillable = [
         'npk',
         'nama',
         'tanggal_lahir',
         'jenis_kelamin',
         'nohp',
-        'jabatan',
+        'jabatan_id',
         'tmt',
         'foto',
     ];

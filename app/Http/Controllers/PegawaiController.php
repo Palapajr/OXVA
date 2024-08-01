@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jabatan;
 use App\Models\Pegawai;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -15,7 +16,7 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        $data = Pegawai::orderBy('created_at', 'desc')->get();
+        $data = Pegawai::with('jabatan')->orderBy('created_at', 'desc')->get();
         return view('pegawai.index', compact('data'));
     }
 
@@ -24,7 +25,10 @@ class PegawaiController extends Controller
      */
     public function create()
     {
-        return view('pegawai.create');
+
+        $jabatan = Jabatan::all();
+        return view('pegawai.create', compact('jabatan') );
+        // return view('pegawai.create', ['jabatan' => $jabatan] );
     }
 
     /**
@@ -32,16 +36,19 @@ class PegawaiController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+
         $this->validate($request, [
             'npk' => 'required|unique:pegawais',
             'nama' => 'required',
             'tanggal_lahir' => 'required|date',
             'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
             'nohp' => 'required',
-            'jabatan' => 'required',
+            'jabatan_id' => 'required',
             'tmt' => 'required|date',
             'foto' => 'nullable|file|image|max:2048'
         ]);
+
+
 
         //upload image
         $foto = $request->file('foto');
@@ -54,7 +61,7 @@ class PegawaiController extends Controller
             'tanggal_lahir' => $request->tanggal_lahir,
             'jenis_kelamin' => $request->jenis_kelamin,
             'nohp' => $request->nohp,
-            'jabatan' => $request->jabatan,
+            'jabatan_id' => $request->jabatan_id,
             'tmt' => $request->tmt,
             'foto' => $foto->hashName()
         ]);
@@ -81,10 +88,11 @@ class PegawaiController extends Controller
     public function edit(string $id): View
     {
         //get post by ID
-        $data = Pegawai::findOrFail($id);
+        $data = Pegawai::with('jabatan')->findOrFail($id);
+        $jabatan = Jabatan::all();
 
         //render view with post
-        return view('pegawai.update', compact('data'));
+        return view('pegawai.update', compact('data', 'jabatan'));
     }
 
     /**
@@ -98,7 +106,7 @@ class PegawaiController extends Controller
             'tanggal_lahir' => 'required|date',
             'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
             'nohp' => 'required',
-            'jabatan' => 'required',
+            'jabatan_id' => 'required',
             'tmt' => 'required|date',
             'foto' => 'nullable|file|image|max:2048'
         ]);
@@ -122,7 +130,7 @@ class PegawaiController extends Controller
                 'tanggal_lahir' => $request->tanggal_lahir,
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'nohp' => $request->nohp,
-                'jabatan' => $request->jabatan,
+                'jabatan_id' => $request->jabatan_id,
                 'tmt' => $request->tmt,
                 'foto' => $foto->hashName()
             ]);
@@ -135,7 +143,7 @@ class PegawaiController extends Controller
                 'tanggal_lahir' => $request->tanggal_lahir,
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'nohp' => $request->nohp,
-                'jabatan' => $request->jabatan,
+                'jabatan_id' => $request->jabatan_id,
                 'tmt' => $request->tmt
             ]);
         }

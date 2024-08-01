@@ -51,7 +51,7 @@
                                             <td>{{ $item->nama }}</td>
                                             <td>{{ $item->npk }}</td>
                                             <td>{{ $item->nohp }}</td>
-                                            <td>{{ $item->jabatan }}</td>
+                                            <td>{{ $item->jabatan->nama_jabatan }}</td>
 
                                             <td>
                                                 {{-- <a href="{{ route('pegawai.show', $item->id) }}" class="btn btn-icon btn-info"><i class="fa fa-solid fa-eye"></i></a> --}}
@@ -134,7 +134,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Jabatan</th>
-                                    <th scope="row"><strong>{{ $item->jabatan }}</strong></th>
+                                    <th scope="row"><strong>{{ $item->jabatan->nama_jabatan }}</strong></th>
                                 </tr>
                             </thead>
                             <thead>
