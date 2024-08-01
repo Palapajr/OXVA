@@ -27,7 +27,7 @@ class PegawaiController extends Controller
     {
 
         $jabatan = Jabatan::all();
-        return view('pegawai.create', compact('jabatan') );
+        return view('pegawai.create', compact('jabatan'));
         // return view('pegawai.create', ['jabatan' => $jabatan] );
     }
 

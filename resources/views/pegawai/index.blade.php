@@ -52,7 +52,6 @@
                                             <td>{{ $item->npk }}</td>
                                             <td>{{ $item->nohp }}</td>
                                             <td>{{ $item->jabatan->nama_jabatan }}</td>
-
                                             <td>
                                                 {{-- <a href="{{ route('pegawai.show', $item->id) }}" class="btn btn-icon btn-info"><i class="fa fa-solid fa-eye"></i></a> --}}
                                                 <button class="btn btn-icon btn-info" data-toggle="modal"

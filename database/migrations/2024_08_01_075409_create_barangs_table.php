@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('barangs', function (Blueprint $table) {
             $table->id();
             $table->string('nama_barang');
-            $table->foreignId('satuan_id')->constrained('satuans');
-            $table->foreignId('lokasi_id')->constrained('lokasis');
+            $table->date('tgl_beli');
+            $table->unsignedBigInteger('satuan_id')->nullable();
+            $table->unsignedBigInteger('lokasi_id')->nullable();
             $table->string('jumlah');
             $table->string('deskripsi');
             $table->string('kondisi');
