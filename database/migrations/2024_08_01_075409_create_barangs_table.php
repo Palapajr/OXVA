@@ -13,13 +13,16 @@ return new class extends Migration
     {
         Schema::create('barangs', function (Blueprint $table) {
             $table->id();
+            $table->string('kode_barang')->unique();
             $table->string('nama_barang');
+            $table->string('type');
             $table->date('tgl_beli');
             $table->unsignedBigInteger('satuan_id')->nullable();
             $table->unsignedBigInteger('lokasi_id')->nullable();
             $table->string('jumlah');
             $table->string('deskripsi');
             $table->string('kondisi');
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }

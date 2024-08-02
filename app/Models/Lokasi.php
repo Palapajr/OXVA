@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Barang;
 
 class Lokasi extends Model
 {
@@ -15,4 +16,9 @@ class Lokasi extends Model
         'id',
         'nama_lokasi',
     ];
+
+    public function barang()
+    {
+        return $this->hasMany(Barang::class);
+    }
 }

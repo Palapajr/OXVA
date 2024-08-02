@@ -83,7 +83,7 @@
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
-                                <label>Nama Jabatan</label>
+                                <label>Nama Lokasi</label>
                                 <input type="text" class="form-control @error('nama_lokasi') is-invalid @enderror"
                                     value="{{ old('nama_lokasi') }}" name="nama_lokasi" required>
                                 @error('nama_lokasi')
