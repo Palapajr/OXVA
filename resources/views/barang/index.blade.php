@@ -48,9 +48,21 @@
                                                     style="width: 80px">
                                                 {{-- <img src="{{ asset('images') . '/' . $item->foto }}" width="50" height="50"> --}}
                                             </td>
+                                            <td>{{ $item->kode_barang }}</td>
                                             <td>{{ $item->nama_barang }}</td>
                                             <td>{{ $item->type }}</td>
-                                            <td>{{ $item->kondisi }}</td>
+                                            {{-- <td>{{ $item->kondisi }}</td> --}}
+                                            <td>
+                                                @if ($item->kondisi === 'Bagus')
+                                                    <div class="badge badge-success">Bagus</div>
+                                                @elseif ($item->kondisi === 'Rusak')
+                                                    <div class="badge badge-warning">Rusak</div>
+                                                @elseif ($item->kondisi === 'Tidak Layak')
+                                                    <div class="badge badge-danger">Tidak Layak Pakai</div>
+                                                @else
+                                                    <p>Status tidak diketahui</p>
+                                                @endif
+                                            </td>
                                             {{-- <td>{{ $item->jabatan->nama_jabatan }}</td> --}}
                                             <td>
                                                 {{-- <a href="{{ route('pegawai.show', $item->id) }}" class="btn btn-icon btn-info"><i class="fa fa-solid fa-eye"></i></a> --}}
@@ -96,51 +108,72 @@
                         <table class="table table-sm">
                             <thead>
                                 <div class="text-center">
-                                    <img src="{{ asset('/storage/pegawai/' . $item->foto) }}" class="rounded mb-3"
+                                    <img src="{{ asset('/storage/barang/' . $item->foto) }}" class="rounded mb-3"
                                         style="width: 250px; height: 350px; border-radius: 100%; border: 2px solid #000000;">
                                 </div>
                                 <tr>
-                                    <th scope="col">NPK</th>
-                                    <th scope="row"><strong>{{ $item->npk }}</strong></th>
+                                    <th scope="col">Kode Barang</th>
+                                    <th scope="row"><strong>{{ $item->kode_barang }}</strong></th>
                                 </tr>
                             </thead>
                             <thead>
                                 <tr>
-                                    <th scope="col">Nama</th>
-                                    <th scope="row"><strong>{{ $item->nama }}</strong></th>
+                                    <th scope="col">Nama Barang</th>
+                                    <th scope="row"><strong>{{ $item->nama_barang }}</strong></th>
                                 </tr>
                             </thead>
                             <thead>
                                 <tr>
-                                    <th scope="col">Tanggal Lahir</th>
+                                    <th scope="col">Type/Merk</th>
+                                    <th scope="row"><strong>{{ $item->type }}</strong></th>
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Tanggal Beli</th>
                                     <th scope="row">
-                                        <strong>{{ date('d-M-Y', strtotime($item->tanggal_lahir)) }}</strong>
+                                        <strong>{{ date('d-M-Y', strtotime($item->tgl_beli)) }}</strong>
                                     </th>
                                 </tr>
                             </thead>
                             <thead>
                                 <tr>
-                                    <th scope="col">Jenis Kelamin</th>
-                                    <th scope="row"><strong>{{ $item->jenis_kelamin }}</strong></th>
+                                    <th scope="col">Satuan Barang</th>
+                                    <th scope="row"><strong>{{ $item->satuan->nama_satuan }}</strong></th>
+
                                 </tr>
                             </thead>
                             <thead>
                                 <tr>
-                                    <th scope="col">No HP</th>
-                                    <th scope="row"><strong>{{ $item->nohp }}</strong></th>
+                                    <th scope="col">Lokasi Barang</th>
+                                    <th scope="row"><strong>{{ $item->lokasi->nama_lokasi }}</strong></th>
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Jumblah Barang</th>
+                                    <th scope="row"><strong>{{ $item->jumlah }}</strong></th>
                                 </tr>
                             </thead>
                             <thead>
                                 <tr>
                                     <th scope="col">Jabatan</th>
-                                    {{-- <th scope="row"><strong>{{ $item->jabatan->nama_jabatan }}</strong></th> --}}
+                                    <th scope="row"><strong>{{ $item->deskripsi }}</strong></th>
                                 </tr>
                             </thead>
                             <thead>
                                 <tr>
-                                    <th scope="col">TMT</th>
+                                    <th scope="col">Kondisi</th>
                                     <th scope="row">
-                                        <strong>{{ date('d-M-Y', strtotime($item->tmt)) }}</strong>
+                                        @if ($item->kondisi === 'Bagus')
+                                        <div class="badge badge-success">Bagus</div>
+                                    @elseif ($item->kondisi === 'Rusak')
+                                        <div class="badge badge-warning">Rusak</div>
+                                    @elseif ($item->kondisi === 'Tidak Layak')
+                                        <div class="badge badge-danger">Tidak Layak Pakai</div>
+                                    @else
+                                        <p>Status tidak diketahui</p>
+                                    @endif
                                     </th>
                                 </tr>
                             </thead>
@@ -162,10 +195,10 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>Apakah anda yakin menghapus data -> <b>{{ $item->nama }} ?</b> </p>
+                        <p>Apakah anda yakin menghapus data -> <b>{{ $item->nama_barang }} ?</b> </p>
                     </div>
                     <div class="modal-footer justify-content-between">
-                        <form action="{{ route('pegawai.destroy', $item->id) }}" method="POST">
+                        <form action="{{ route('barang.destroy', $item->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

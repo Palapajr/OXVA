@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\Lokasi;
 use App\Models\Satuan;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class BarangController extends Controller
 
@@ -33,9 +34,8 @@ class BarangController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        DB::beginTransaction();
 
         $this->validate($request, [
             'nama_barang' => 'required',
@@ -70,23 +70,6 @@ class BarangController extends Controller
         ]);
 
         $foto->storeAs('public/barang', $foto_filename);
-        // $barang_input = [
-
-        //     'kode_barang' => "sprs-0002",
-        //     'nama_barang' => $request->nama_barang,
-        //     'type' => $request->type,
-        //     'tgl_beli' => $request->tgl_beli,
-        //     'satuan_id' => $request->satuan_id,
-        //     'lokasi_id' => $request->lokasi_id,
-        //     'jumlah' => $request->jumlah,
-        //     'deskripsi' => $request->deskripsi,
-        //     'kondisi' => $request->kondisi,
-        //     'foto' => "foto.png"
-        // ];
-
-        // // dd($barang_input);
-        // Barang::create($barang_input);
-
 
         //redirect to index
         return redirect()->route('barang.index')->with(['success' => 'Data Barang Berhasil Disimpan!']);
@@ -128,8 +111,19 @@ class BarangController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): RedirectResponse
     {
-        //
+        //get post by ID
+        $data = Barang::findOrFail($id);
+
+        //delete image
+        Storage::delete('public/barang/' . $data->foto);
+        // Storage::delete('public/pegawai/' . $data->foto);
+
+        //delete post
+        $data->delete();
+
+        //redirect to index
+        return redirect()->route('barang.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }

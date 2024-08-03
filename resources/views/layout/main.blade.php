@@ -85,7 +85,7 @@
                                 <span>Data Pegawai</span></a></li>
 
                         <li class="{{ Request::is('barang') ? 'active' : '' }} || {{ Request::is('barang/create') ? 'active' : '' }} || {{ Request::is('barang/*/edit') ? 'active' : '' }}"><a class="nav-link"
-                            href="{{ url('/barang') }}"><i class="fas fa-user"></i>
+                            href="{{ url('/barang') }}"><i class="fas fa-layer-group"></i>
                             <span>Data Barang</span></a></li>
 
                         <li class="dropdown {{ Request::is('jabatan') ? 'active' : '' }} || {{ Request::is('satuan') ? 'active' : '' }} || {{ Request::is('lokasi') ? 'active' : '' }}">

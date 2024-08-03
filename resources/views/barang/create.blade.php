@@ -3,7 +3,6 @@
 @section('csslibrary')
     <link rel="stylesheet" href="/assets/modules/bootstrap-daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="/assets/modules/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
-    <link rel="stylesheet" href="/assets/modules/summernote/summernote-bs4.css">
 
 @stop
 
@@ -113,7 +112,7 @@
                                 <div class="form-group">
                                     <label>Deskripsi</label>
                                     <div>
-                                        <textarea class="summernote @error('deskripsi') is-invalid @enderror" name="deskripsi" value="{{ old('deskripsi') }}"></textarea>
+                                        <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" value="{{ old('deskripsi') }}"></textarea>
                                         @error('deskripsi')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -126,9 +125,9 @@
                                     <select name="kondisi" class="form-control @error('kondisi') is-invalid @enderror"
                                         value="{{ old('kondisi') }}">
                                         <option>Silakan pilih</option>
-                                        <option {{ old('kondisi') == '1' ? 'selected' : '' }} value="1">Bagus</option>
-                                        <option {{ old('kondisi') == '2' ? 'selected' : '' }} value="2">Rusak</option>
-                                        <option {{ old('kondisi') == '3' ? 'selected' : '' }} value="3">Tidak Layak
+                                        <option {{ old('kondisi') == 'Bagus' ? 'selected' : '' }} value="Bagus">Bagus</option>
+                                        <option {{ old('kondisi') == 'Rusak' ? 'selected' : '' }} value="Rusak">Rusak</option>
+                                        <option {{ old('kondisi') == 'Tidak Layak' ? 'selected' : '' }} value="Tidak Layak">Tidak Layak
                                             Pakai</option>
                                     </select>
                                     @error('kondisi')
@@ -187,5 +186,4 @@
             }
         }
     </script>
-    <script src="/assets/modules/summernote/summernote-bs4.js"></script>
 @stop
