@@ -6,8 +6,10 @@ use App\Models\Barang;
 use App\Models\Lokasi;
 use App\Models\Satuan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BarangController extends Controller
+
 {
     /**
      * Display a listing of the resource.
@@ -33,6 +35,8 @@ class BarangController extends Controller
      */
     public function store(Request $request)
     {
+        DB::beginTransaction();
+
         $this->validate($request, [
             'nama_barang' => 'required',
             'type' => 'required',
@@ -47,11 +51,12 @@ class BarangController extends Controller
 
         //upload image
         $foto = $request->file('foto');
-        $foto->storeAs('public/barang', $foto->hashName());
+        $foto_filename = $foto->hashName();
+        // $foto->storeAs('public/barang', $foto_filename);
 
         //create pegawai
         Barang::create([
-            'kode_barang ' => $this->generateKodeBarang(),
+            'kode_barang' => $this->generateKodeBarang(),
             'nama_barang' => $request->nama_barang,
             'type' => $request->type,
             'tgl_beli' => $request->tgl_beli,
@@ -60,14 +65,35 @@ class BarangController extends Controller
             'jumlah' => $request->jumlah,
             'deskripsi' => $request->deskripsi,
             'kondisi' => $request->kondisi,
-            'foto' => $foto->hashName()
+            'foto' => $foto_filename
+            // 'foto' => "foto.png"
         ]);
+
+        $foto->storeAs('public/barang', $foto_filename);
+        // $barang_input = [
+
+        //     'kode_barang' => "sprs-0002",
+        //     'nama_barang' => $request->nama_barang,
+        //     'type' => $request->type,
+        //     'tgl_beli' => $request->tgl_beli,
+        //     'satuan_id' => $request->satuan_id,
+        //     'lokasi_id' => $request->lokasi_id,
+        //     'jumlah' => $request->jumlah,
+        //     'deskripsi' => $request->deskripsi,
+        //     'kondisi' => $request->kondisi,
+        //     'foto' => "foto.png"
+        // ];
+
+        // // dd($barang_input);
+        // Barang::create($barang_input);
+
 
         //redirect to index
         return redirect()->route('barang.index')->with(['success' => 'Data Barang Berhasil Disimpan!']);
     }
 
-    private function generateKodeBarang(){
+    private function generateKodeBarang()
+    {
         $latestBarang = Barang::orderBy('created_at', 'DESC')->first();
         if (!$latestBarang) {
             return 'SPRS-0001';

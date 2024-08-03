@@ -30,8 +30,8 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label>Kode Barang</label>
-                                    <input type="text" class="form-control"
-                                        value="{{ old('kode_barang') }}" name="kode_barang" readonly disabled placeholder="Kode Otomatis" >
+                                    <input type="text" class="form-control" value="{{ old('kode_barang') }}"
+                                        name="kode_barang" readonly disabled placeholder="Kode Otomatis">
                                 </div>
                                 <div class="form-group">
                                     <label>Nama Barang</label>
@@ -66,13 +66,14 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Satuan</label>
-                                    <select name="satuan_id" class="form-control @error('satuan_id') is-invalid @enderror"  value="{{ old('satuan_id') }}">
+                                    <select name="satuan_id" class="form-control @error('satuan_id') is-invalid @enderror"
+                                        value="{{ old('satuan_id') }}">
                                         <option>Silakan pilih</option>
                                         @foreach ($satuan as $item)
-                                          <option value="{{ $item->id }}"
-                                            {{ old('satuan_id', isset($data) ? $data->jabatan_id : '') == $item->id ? 'selected' : '' }}>
-                                            {{ $item->nama_satuan }}
-                                          </option>
+                                            <option value="{{ $item->id }}"
+                                                {{ old('satuan_id', isset($data) ? $data->jabatan_id : '') == $item->id ? 'selected' : '' }}>
+                                                {{ $item->nama_satuan }}
+                                            </option>
                                         @endforeach
                                     </select>
                                     @error('satuan_id')
@@ -83,13 +84,14 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Lokasi</label>
-                                    <select name="lokasi_id" class="form-control @error('lokasi_id') is-invalid @enderror"  value="{{ old('lokasi_id') }}">
+                                    <select name="lokasi_id" class="form-control @error('lokasi_id') is-invalid @enderror"
+                                        value="{{ old('lokasi_id') }}">
                                         <option>Silakan pilih</option>
                                         @foreach ($lokasi as $item)
-                                          <option value="{{ $item->id }}"
-                                            {{ old('lokasi_id', isset($data) ? $data->jabatan_id : '') == $item->id ? 'selected' : '' }}>
-                                            {{ $item->nama_lokasi }}
-                                          </option>
+                                            <option value="{{ $item->id }}"
+                                                {{ old('lokasi_id', isset($data) ? $data->jabatan_id : '') == $item->id ? 'selected' : '' }}>
+                                                {{ $item->nama_lokasi }}
+                                            </option>
                                         @endforeach
                                     </select>
                                     @error('lokasi_id')
@@ -111,21 +113,23 @@
                                 <div class="form-group">
                                     <label>Deskripsi</label>
                                     <div>
-                                      <textarea class="summernote @error('deskripsi') is-invalid @enderror" name="deskripsi" value="{{ old('deskripsi') }}"></textarea>
-                                      @error('deskripsi')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
+                                        <textarea class="summernote @error('deskripsi') is-invalid @enderror" name="deskripsi" value="{{ old('deskripsi') }}"></textarea>
+                                        @error('deskripsi')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Kondisi</label>
-                                    <select name="kondisi" class="form-control @error('kondisi') is-invalid @enderror"  value="{{ old('kondisi') }}">
+                                    <select name="kondisi" class="form-control @error('kondisi') is-invalid @enderror"
+                                        value="{{ old('kondisi') }}">
                                         <option>Silakan pilih</option>
                                         <option {{ old('kondisi') == '1' ? 'selected' : '' }} value="1">Bagus</option>
                                         <option {{ old('kondisi') == '2' ? 'selected' : '' }} value="2">Rusak</option>
-                                        <option {{ old('kondisi') == '3' ? 'selected' : '' }} value="3">Tidak Layak Pakai</option>
+                                        <option {{ old('kondisi') == '3' ? 'selected' : '' }} value="3">Tidak Layak
+                                            Pakai</option>
                                     </select>
                                     @error('kondisi')
                                         <div class="invalid-feedback">

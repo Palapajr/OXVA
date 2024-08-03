@@ -44,14 +44,14 @@
                                     @foreach ($data as $item)
                                         <tr class="text-center">
                                             <td>
-                                                <img src="{{ asset('/storage/pegawai/' . $item->foto) }}" class="rounded"
+                                                <img src="{{ asset('/storage/barang/' . $item->foto) }}" class="rounded"
                                                     style="width: 80px">
                                                 {{-- <img src="{{ asset('images') . '/' . $item->foto }}" width="50" height="50"> --}}
                                             </td>
-                                            <td>{{ $item->nama }}</td>
-                                            <td>{{ $item->npk }}</td>
-                                            <td>{{ $item->nohp }}</td>
-                                            <td>{{ $item->jabatan->nama_jabatan }}</td>
+                                            <td>{{ $item->nama_barang }}</td>
+                                            <td>{{ $item->type }}</td>
+                                            <td>{{ $item->kondisi }}</td>
+                                            {{-- <td>{{ $item->jabatan->nama_jabatan }}</td> --}}
                                             <td>
                                                 {{-- <a href="{{ route('pegawai.show', $item->id) }}" class="btn btn-icon btn-info"><i class="fa fa-solid fa-eye"></i></a> --}}
                                                 <button class="btn btn-icon btn-info" data-toggle="modal"
@@ -133,7 +133,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Jabatan</th>
-                                    <th scope="row"><strong>{{ $item->jabatan->nama_jabatan }}</strong></th>
+                                    {{-- <th scope="row"><strong>{{ $item->jabatan->nama_jabatan }}</strong></th> --}}
                                 </tr>
                             </thead>
                             <thead>
