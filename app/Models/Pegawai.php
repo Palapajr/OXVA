@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Jabatan;
+use App\Models\Pemeliharaan;
 
 class Pegawai extends Model
 {
@@ -26,5 +27,10 @@ class Pegawai extends Model
     public function jabatan()
     {
         return $this->belongsTo(Jabatan::class);
+    }
+
+    public function pemeliharaan()
+    {
+        return $this->hasMany(Pemeliharaan::class);
     }
 }

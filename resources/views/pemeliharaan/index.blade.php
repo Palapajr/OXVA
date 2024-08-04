@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/assets/modules/prism/prism.css">
 @endsection
 
-@section('title', 'Data Barang')
+@section('title', 'Data Pemeliharaan')
 
 @section('content')
     <div class="section-header">
@@ -32,33 +32,26 @@
                             <table class="table table-striped" id="table-1">
                                 <thead>
                                     <tr class="text-center">
-                                        <th>Foto</th>
-                                        <th>Kode Barang</th>
                                         <th>Nama Barang</th>
-                                        <th>Type</th>
-                                        <th>Kondisi</th>
+                                        <th>Tgl Perbaikan</th>
+                                        <th>Waktu Perbaikan</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($data as $item)
                                         <tr class="text-center">
+                                            <td>{{ $item->barang->nama_barang }}</td>
+                                            <td>{{ date('d-m-Y', strtotime($item->tgl_perbaikan)) }}</td>
+                                            <td>{{ date('H:i', strtotime($item->jam_perbaikan)) }}</td>
                                             <td>
-                                                <img src="{{ asset('/storage/barang/' . $item->foto) }}" class="rounded"
-                                                    style="width: 80px">
-                                                {{-- <img src="{{ asset('images') . '/' . $item->foto }}" width="50" height="50"> --}}
-                                            </td>
-                                            <td>{{ $item->kode_barang }}</td>
-                                            <td>{{ $item->nama_barang }}</td>
-                                            <td>{{ $item->type }}</td>
-                                            {{-- <td>{{ $item->kondisi }}</td> --}}
-                                            <td>
-                                                @if ($item->kondisi === 'Bagus')
-                                                    <div class="badge badge-success">Bagus</div>
-                                                @elseif ($item->kondisi === 'Rusak')
-                                                    <div class="badge badge-warning">Rusak</div>
-                                                @elseif ($item->kondisi === 'Tidak Layak')
-                                                    <div class="badge badge-danger">Tidak Layak Pakai</div>
+                                                @if ($item->status === 'Closed')
+                                                    <div class="badge badge-success">Closed</div>
+                                                @elseif ($item->status === 'Waiting')
+                                                    <div class="badge badge-warning">Waiting</div>
+                                                {{-- @elseif ($item->kondisi === 'Tidak Layak')
+                                                    <div class="badge badge-danger">Tidak Layak Pakai</div> --}}
                                                 @else
                                                     <p>Status tidak diketahui</p>
                                                 @endif

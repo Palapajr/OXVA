@@ -6,7 +6,7 @@
 
 @stop
 
-@section('title', 'Tambah Data Barang')
+@section('title', 'Edit Data Barang')
 
 @section('content')
     <div class="section-header">
@@ -24,18 +24,19 @@
                     </div>
 
                     <div class="modal-body">
-                        <form action="{{ route('barang.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('barang.update', $data->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             <div class="card-body">
                                 <div class="form-group">
                                     <label>Kode Barang</label>
-                                    <input type="text" class="form-control" value="{{ old('kode_barang') }}"
+                                    <input type="text" class="form-control" value="{{ old('kode_barang', $data->kode_barang) }}"
                                         name="kode_barang" readonly disabled placeholder="Kode Otomatis">
                                 </div>
                                 <div class="form-group">
                                     <label>Nama Barang</label>
                                     <input type="text" class="form-control @error('nama_barang') is-invalid @enderror"
-                                        value="{{ old('nama_barang') }}" name="nama_barang">
+                                        value="{{ old('nama_barang', $data->nama_barang) }}" name="nama_barang">
                                     @error('nama_barang')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -43,9 +44,9 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label>Nama Barang</label>
+                                    <label>Type Barang</label>
                                     <input type="text" class="form-control @error('type') is-invalid @enderror"
-                                        value="{{ old('type') }}" name="type">
+                                        value="{{ old('type', $data->type) }}" name="type">
                                     @error('type')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -56,7 +57,7 @@
                                     <label>Tanggal Beli</label>
                                     {{-- <input type="text" class="form-control datepicker" name="tanggal_lahir"> --}}
                                     <input type="date" class="form-control @error('tgl_beli') is-invalid @enderror"
-                                        value="{{ old('tgl_beli') }}" name="tgl_beli">
+                                        value="{{ old('tgl_beli', $data->tgl_beli) }}" name="tgl_beli">
                                     @error('tgl_beli')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -102,7 +103,7 @@
                                 <div class="form-group">
                                     <label>Jumlah</label>
                                     <input type="text" class="form-control @error('jumlah') is-invalid @enderror"
-                                        name="jumlah" value="{{ old('jumlah') }}">
+                                        name="jumlah" value="{{ old('jumlah', $data->jumlah) }}">
                                     @error('jumlah')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -111,24 +112,21 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Deskripsi</label>
-                                    <div>
-                                        <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" value="{{ old('deskripsi') }}"></textarea>
+                                        <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" value="{{ old('deskripsi', $data->deskripsi) }}">{{ $data->deskripsi }}</textarea>
                                         @error('deskripsi')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
                                         @enderror
-                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Kondisi</label>
                                     <select name="kondisi" class="form-control @error('kondisi') is-invalid @enderror"
-                                        value="{{ old('kondisi') }}">
+                                        value="{{ old('kondisi', $data->kondisi) }}">
                                         <option>Silakan pilih</option>
-                                        <option {{ old('kondisi') == 'Bagus' ? 'selected' : '' }} value="Bagus">Bagus</option>
-                                        <option {{ old('kondisi') == 'Rusak' ? 'selected' : '' }} value="Rusak">Rusak</option>
-                                        <option {{ old('kondisi') == 'Tidak Layak' ? 'selected' : '' }} value="Tidak Layak">Tidak Layak
-                                            Pakai</option>
+                                        <option {{ $data->kondisi == 'Bagus' ? 'selected' : '' }} value="Bagus">Bagus</option>
+                                        <option {{ $data->kondisi == 'Rusak' ? 'selected' : '' }} value="Rusak">Rusak</option>
+                                        <option {{ $data->kondisi == 'Tidak Layak' ? 'selected' : '' }} value="Tidak Layak">Tidak Layak Pakai</option>
                                     </select>
                                     @error('kondisi')
                                         <div class="invalid-feedback">
@@ -147,7 +145,12 @@
                                             {{ $message }}
                                         </div>
                                     @enderror
-                                    <img class="img-preview img-fluid" style="width: 150px">
+                                    @if ($data->foto)
+                                        <img src="{{ asset('/storage/barang/' . $data->foto) }}"
+                                            class="img-preview img-fluid d-block" style="width: 150px">
+                                    @else
+                                        <img class="img-preview img-fluid" style="width: 150px">
+                                    @endif
                                     {{-- <img src="" id="showImage" class="img-fluid" width="100px"> --}}
                                 </div>
                             </div>

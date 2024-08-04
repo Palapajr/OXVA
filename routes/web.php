@@ -25,3 +25,4 @@ Route::resource('/barang', \App\Http\Controllers\BarangController::class);
 Route::resource('/jabatan', \App\Http\Controllers\JabaatanController::class);
 Route::resource('/satuan', \App\Http\Controllers\SatuanController::class);
 Route::resource('/lokasi', \App\Http\Controllers\LokasiController::class);
+Route::resource('/pemeliharaan', \App\Http\Controllers\PemeliharaanController::class);

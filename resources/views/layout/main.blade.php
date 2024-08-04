@@ -88,6 +88,10 @@
                             href="{{ url('/barang') }}"><i class="fas fa-layer-group"></i>
                             <span>Data Barang</span></a></li>
 
+                        <li class="{{ Request::is('pemeliharaan') ? 'active' : '' }} || {{ Request::is('pemeliharaan/create') ? 'active' : '' }} || {{ Request::is('pemeliharaan/*/edit') ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ url('/pemeliharaan') }}"><i class="fas fa-wrench"></i>
+                            <span>Data Pemeliharaan</span></a></li>
+
                         <li class="dropdown {{ Request::is('jabatan') ? 'active' : '' }} || {{ Request::is('satuan') ? 'active' : '' }} || {{ Request::is('lokasi') ? 'active' : '' }}">
                             <a href="#" class="nav-link has-dropdown"><i class="fas fa-database"></i><span>Master
                                     Data</span></a>

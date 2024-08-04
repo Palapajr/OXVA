@@ -35,4 +35,9 @@ class Barang extends Model
     {
         return $this->belongsTo(Lokasi::class);
     }
+
+    public function pemeliharaan()
+    {
+        return $this->hasMany(Pemeliharaan::class);
+    }
 }

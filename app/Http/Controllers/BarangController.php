@@ -87,25 +87,69 @@ class BarangController extends Controller
         return 'SPRS-' . str_pad($number, 4, '0', STR_PAD_LEFT);
     }
 
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        //
+
+        //get post by ID
+        $data = Barang::with('satuan', 'lokasi')->findOrFail($id);
+        $satuan = Satuan::all();
+        $lokasi = Lokasi::all();
+
+        //render view with post
+        return view('barang.update', compact('data', 'satuan', 'lokasi'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id): RedirectResponse
     {
-        //
+        $this->validate($request, [
+            'nama_barang' => 'required',
+            'type' => 'required',
+            'tgl_beli' => 'required|date',
+            'satuan_id' => 'required',
+            'lokasi_id' => 'required',
+            'jumlah' => 'required',
+            'deskripsi' => 'required',
+            'kondisi' => 'required',
+            'foto' => 'nullable|file|image|max:2048'
+        ]);
+
+        $data = Barang::with('satuan', 'lokasi')->findOrFail($id);
+
+        if ($request->hasFile('foto')) {
+
+            //upload new image
+            $foto = $request->file('foto');
+            $foto->storeAs('public/barang', $foto->hashName());
+
+            //delete old image
+            Storage::delete('public/barang/' . $data->foto);
+
+            $data->update([
+                'nama_barang' => $request->nama_barang,
+                'type' => $request->type,
+                'tgl_beli' => $request->tgl_beli,
+                'satuan_id' => $request->satuan_id,
+                'lokasi_id' => $request->lokasi_id,
+                'jumlah' => $request->jumlah,
+                'deskripsi' => $request->deskripsi,
+                'kondisi' => $request->kondisi,
+                'foto' => $foto->hashName()
+            ]);
+
+        } else {
+            $data->update([
+                'nama_barang' => $request->nama_barang,
+                'type' => $request->type,
+                'tgl_beli' => $request->tgl_beli,
+                'satuan_id' => $request->satuan_id,
+                'lokasi_id' => $request->lokasi_id,
+                'jumlah' => $request->jumlah,
+                'deskripsi' => $request->deskripsi,
+                'kondisi' => $request->kondisi
+            ]);
+        }
+        //redirect to index
+        return redirect()->route('barang.index')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
     /**
