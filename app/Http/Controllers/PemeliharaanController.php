@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barang;
+use App\Models\Lokasi;
+use App\Models\Pegawai;
 use App\Models\Pemeliharaan;
 use Illuminate\Http\Request;
 
@@ -13,15 +16,10 @@ class PemeliharaanController extends Controller
     public function index()
     {
         $data = Pemeliharaan::orderBy('created_at', 'desc')->get();
-        return view('pemeliharaan.index', compact('data'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $barang = Barang::all();
+        $lokasi = Lokasi::all();
+        $pegawai = Pegawai::all();
+        return view('pemeliharaan.index', compact('data', 'barang', 'lokasi', 'pegawai'));
     }
 
     /**

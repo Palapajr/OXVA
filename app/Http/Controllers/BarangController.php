@@ -135,7 +135,6 @@ class BarangController extends Controller
                 'kondisi' => $request->kondisi,
                 'foto' => $foto->hashName()
             ]);
-
         } else {
             $data->update([
                 'nama_barang' => $request->nama_barang,

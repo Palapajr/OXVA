@@ -9,16 +9,18 @@ class Komplain extends Model
 {
     use HasFactory;
 
-    const STATUS_PROSES = '1';
-    const STATUS_SEDANG_DIPROSES = '2';
-    const STATUS_SELESAI = '3';
+    const STATUS_PROSES = 'Proses';
+    const STATUS_SEDANG_DIPROSES = 'Sedang Proses';
+    const STATUS_SELESAI = 'Selesai';
 
     protected $fillable = [
+        'kode_pelapor',
         'nama_pelapor',
         'bidang',
         'deskripsi',
         'foto_bukti',
-        'status_transaksi'
+        'status_transaksi',
+        'typeKomplain'
     ];
 
     public function setStatus($status)

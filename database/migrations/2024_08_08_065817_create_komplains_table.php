@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('komplains', function (Blueprint $table) {
             $table->id();
+            $table->string('kode_pelapor')->unique();
             $table->string('nama_pelapor');
             $table->string('bidang');
             $table->string('deskripsi');
             $table->string('foto_bukti')->nullable();
-            $table->string('status_transaksi')->default('1');
+            $table->enum('status_transaksi', ['Proses', 'Sedang Proses', 'Selesai'])->default('proses');
+            $table->string('typeKomplain');
             $table->timestamps();
         });
     }

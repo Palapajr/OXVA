@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/assets/modules/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/modules/fontawesome/css/all.min.css">
 
+
     <!-- CSS Libraries -->
     @yield('csslibrary')
 
@@ -100,21 +101,27 @@
 
                         <!-- Komplain -->
                         <li
-                            class="dropdown {{ Request::is('komplain') ? 'active' : '' }} || {{ Request::is('satuan') ? 'active' : '' }} || {{ Request::is('lokasi') ? 'active' : '' }}">
+                            class="dropdown {{ Request::is('komplain') ? 'active' : '' }} || {{ Request::is('komplain/proses') ? 'active' : '' }} || {{ Request::is('komplain/sedang-proses') ? 'active' : '' }} || {{ Request::is('komplain/selesai') ? 'active' : '' }}">
                             <a href="#" class="nav-link has-dropdown"><i
                                     class="fas fa-comments"></i></i><span>Data
                                     Komplain</span></a>
                             <ul class="dropdown-menu">
-                                <li class="{{ Request::is('jabatan') ? 'active' : '' }}"><a class="nav-link"
-                                        href="{{ url('/jabatan') }}"><span>Proses</span></a></li>
+                                <li class="{{ Request::is('komplain') ? 'active' : '' }}"><a class="nav-link"
+                                        href="{{ url('/komplain') }}"><span>Komplain Seluruh</span></a></li>
                             </ul>
                             <ul class="dropdown-menu">
-                                <li class="{{ Request::is('satuan') ? 'active' : '' }}"><a class="nav-link"
-                                        href="{{ url('/satuan') }}"><span>Sedang Proses</span></a></li>
+                                <li class="{{ Request::is('komplain/proses') ? 'active' : '' }}"><a class="nav-link"
+                                        href="{{ route('komplain.indexProses') }}"><span>Proses</span></a></li>
                             </ul>
                             <ul class="dropdown-menu">
-                                <li class="{{ Request::is('lokasi') ? 'active' : '' }}"><a class="nav-link"
-                                        href="{{ url('/lokasi') }}"><span>Selesai</span></a></li>
+                                <li class="{{ Request::is('komplain/sedang-proses') ? 'active' : '' }}"><a
+                                        class="nav-link" href="{{ route('komplain.indexSedangProses') }}"><span>Sedang
+                                            Proses</span></a>
+                                </li>
+                            </ul>
+                            <ul class="dropdown-menu">
+                                <li class="{{ Request::is('komplain/selesai') ? 'active' : '' }}"><a class="nav-link"
+                                        href="{{ route('komplain.indexSelesai') }}"><span>Selesai</span></a></li>
                             </ul>
                         </li>
                         <!-- Komplain -->

@@ -34,5 +34,26 @@ Route::resource('/lokasi', LokasiController::class);
 Route::resource('/pemeliharaan', PemeliharaanController::class);
 
 
-Route::get('/komplain', [KomplainController::class, 'index']);
+// Route::get('/komplain', [KomplainController::class, 'index']);
 // Route::resource('/komplain', KomplainController::class);
+
+// Routes untuk User
+Route::get('/', [KomplainController::class, 'createUser'])->name('komplain.createUser');
+Route::post('/komplain/storeuser', [KomplainController::class, 'storeuser'])->name('komplain.storeuser');
+// Route::get('/komplain/indexProses', [KomplainController::class, 'indexProses'])->name('komplain.indexProses');
+
+
+
+Route::get('/komplain', [KomplainController::class, 'index'])->name('komplain.index');
+Route::get('/komplain/proses', [KomplainController::class, 'indexProses'])->name('komplain.indexProses');
+Route::get('/komplain/sedang-proses', [KomplainController::class, 'indexSedangProses'])->name('komplain.indexSedangProses');
+Route::get('/komplain/selesai', [KomplainController::class, 'indexSelesai'])->name('komplain.indexSelesai');
+
+
+// Route untuk mengubah status menjadi "sedang diproses"
+// Route::get('/komplain/{id}/sedang-diproses', [KomplainController::class, 'editSedangDiproses'])->name('komplain.editSedangDiproses');
+Route::post('/komplain/{id}/sedang-diproses', [KomplainController::class, 'updateSedangDiproses'])->name('komplain.updateSedangDiproses');
+
+// Route untuk mengubah status menjadi "selesai"
+// Route::get('/komplain/{id}/selesai', [KomplainController::class, 'editSelesai'])->name('komplain.editSelesai');
+Route::post('/komplain/{id}/selesai', [KomplainController::class, 'updateSelesai'])->name('komplain.updateSelesai');

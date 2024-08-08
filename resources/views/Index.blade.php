@@ -9,8 +9,9 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="assets/img/madani.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="/impact/assets/img/madani.png" rel="icon">
+    <link href="/impact/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link rel="stylesheet" href="/assets/modules/izitoast/css/iziToast.min.css">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -20,14 +21,14 @@
         rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/impact/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/impact/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/impact/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="/impact/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/impact/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
     <!-- Main CSS File -->
-    <link href="assets/css/main.css" rel="stylesheet">
+    <link href="/impact/assets/css/main.css" rel="stylesheet">
 
 </head>
 
@@ -40,7 +41,7 @@
             <div class="container position-relative d-flex align-items-center justify-content-between">
                 <a href="/" class="logo d-flex align-items-center">
                     <!-- Uncomment the line below if you also wish to use an image logo -->
-                    <!-- <img src="assets/img/logo.png" alt=""> -->
+                    <!-- <img src="/impact/assets/img/logo.png" alt=""> -->
                     <h1 class="sitename">SKIIPS</h1>
                     <span>.</span>
                 </a>
@@ -84,7 +85,7 @@
 
                     </div>
                     <div class="col-lg-5 order-1 order-lg-2">
-                        <img src="assets/img/undraw.svg" class="img-fluid" alt="">
+                        <img src="/impact/assets/img/undraw.svg" class="img-fluid" alt="">
                     </div>
                 </div>
             </div>
@@ -95,18 +96,50 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Modal 1</h1>
+                            <h1 class="modal-title fs-5 text-dark" id="exampleModalToggleLabel2">Form Komplain</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
-                        <div class="modal-body d-grid gap-2">
-                            <button type="button" class="btn btn-outline-primary btn-lg"
-                                data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Komplain IT</button><br>
-                            <button type="button" class="btn btn-outline-warning btn-lg"
-                                data-bs-target="#exampleModalToggle3" data-bs-toggle="modal">Komplain
-                                Sarpras</button><br>
-                            <button type="button" class="btn btn-outline-danger btn-lg"
-                                data-bs-target="#exampleModalToggle4" data-bs-toggle="modal">Komplain ATEM</button>
+                        <div class="modal-body">
+                            <form action="{{ route('komplain.storeuser') }}" method="POST"
+                                enctype="multipart/form-data">
+                                @csrf
+                                <div class="row gy-4">
+
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" name="nama_pelapor"
+                                            placeholder="Nama Pelapor" required="">
+                                    </div>
+
+                                    <div class="col-md-6 ">
+                                        <input type="text" class="form-control" name="bidang" placeholder="Bidang"
+                                            required="">
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <textarea class="form-control" name="deskripsi" rows="8" placeholder="Deskrips" required=""></textarea>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <input type="file" class="form-control" name="foto_bukti"
+                                            placeholder="Foto" required="">
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <select class="form-control" name="typeKomplain">
+                                            <option>Pilih Laporan Ke</option>
+                                            <option value="SAR">Sarpras</option>
+                                            <option value="IT">IT</option>
+                                            <option value="ATM">ATEM</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-12 text-center">
+                                        <button class="btn btn-primary" type="submit">Send Message</button>
+                                    </div>
+
+                                </div>
+                            </form>
                         </div>
 
                     </div>
@@ -323,17 +356,33 @@
     <div id="preloader"></div>
 
     <!-- Vendor JS Files -->
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
-    <script src="assets/vendor/aos/aos.js"></script>
-    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-    <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/impact/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/impact/assets/vendor/php-email-form/validate.js"></script>
+    <script src="/impact/assets/vendor/aos/aos.js"></script>
+    <script src="/impact/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="/impact/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="/impact/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="/impact/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+    <script src="/impact/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/modules/izitoast/js/iziToast.min.js"></script>
+    <script>
+        //message with toastr
+        @if (session()->has('success'))
+
+            iziToast.info({
+                title: '{{ session('success') }}',
+                position: 'topRight'
+            });
+
+            // iziToast.success('{{ session('success') }}', 'BERHASIL!');
+        @elseif (session()->has('error'))
+
+            iziToast.error('{{ session('error') }}', 'GAGAL!');
+        @endif
+    </script>
 
     <!-- Main JS File -->
-    <script src="assets/js/main.js"></script>
+    <script src="/impact/assets/js/main.js"></script>
 
 </body>
 

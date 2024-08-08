@@ -14,10 +14,10 @@
     <div class="section-header">
         <h1>@yield('title')</h1>
         <div class="section-header-breadcrumb">
-            <a href="{{ route('barang.create') }}" class="btn btn-icon icon-left btn-primary"><i
+            <button class="btn btn-icon icon-left btn-primary" data-toggle="modal" data-target="#tambah"><i
                     class="fa fa-solid fa-plus"></i>
                 Tambah Data
-            </a>
+            </button>
         </div>
     </div>
 
@@ -50,7 +50,7 @@
                                                     <div class="badge badge-success">Closed</div>
                                                 @elseif ($item->status === 'Waiting')
                                                     <div class="badge badge-warning">Waiting</div>
-                                                {{-- @elseif ($item->kondisi === 'Tidak Layak')
+                                                    {{-- @elseif ($item->kondisi === 'Tidak Layak')
                                                     <div class="badge badge-danger">Tidak Layak Pakai</div> --}}
                                                 @else
                                                     <p>Status tidak diketahui</p>
@@ -85,98 +85,54 @@
 
 @endsection
 @section('modal')
-    @foreach ($data as $item)
-        <!-- Modal detail-->
-        <div class="modal fade" tabindex="-1" role="dialog" id="detail{{ $item->id }}">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Detail data Saudara <strong class="text-info">{{ $item->nama }}</strong>
-                        </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <table class="table table-sm">
-                            <thead>
-                                <div class="text-center">
-                                    <img src="{{ asset('/storage/barang/' . $item->foto) }}" class="rounded mb-3"
-                                        style="width: 250px; height: 350px; border-radius: 100%; border: 2px solid #000000;">
-                                </div>
-                                <tr>
-                                    <th scope="col">Kode Barang</th>
-                                    <th scope="row"><strong>{{ $item->kode_barang }}</strong></th>
-                                </tr>
-                            </thead>
-                            <thead>
-                                <tr>
-                                    <th scope="col">Nama Barang</th>
-                                    <th scope="row"><strong>{{ $item->nama_barang }}</strong></th>
-                                </tr>
-                            </thead>
-                            <thead>
-                                <tr>
-                                    <th scope="col">Type/Merk</th>
-                                    <th scope="row"><strong>{{ $item->type }}</strong></th>
-                                </tr>
-                            </thead>
-                            <thead>
-                                <tr>
-                                    <th scope="col">Tanggal Beli</th>
-                                    <th scope="row">
-                                        <strong>{{ date('d-M-Y', strtotime($item->tgl_beli)) }}</strong>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <thead>
-                                <tr>
-                                    <th scope="col">Satuan Barang</th>
-                                    <th scope="row"><strong>{{ $item->satuan->nama_satuan }}</strong></th>
 
-                                </tr>
-                            </thead>
-                            <thead>
-                                <tr>
-                                    <th scope="col">Lokasi Barang</th>
-                                    <th scope="row"><strong>{{ $item->lokasi->nama_lokasi }}</strong></th>
-                                </tr>
-                            </thead>
-                            <thead>
-                                <tr>
-                                    <th scope="col">Jumblah Barang</th>
-                                    <th scope="row"><strong>{{ $item->jumlah }}</strong></th>
-                                </tr>
-                            </thead>
-                            <thead>
-                                <tr>
-                                    <th scope="col">Jabatan</th>
-                                    <th scope="row"><strong>{{ $item->deskripsi }}</strong></th>
-                                </tr>
-                            </thead>
-                            <thead>
-                                <tr>
-                                    <th scope="col">Kondisi</th>
-                                    <th scope="row">
-                                        @if ($item->kondisi === 'Bagus')
-                                        <div class="badge badge-success">Bagus</div>
-                                    @elseif ($item->kondisi === 'Rusak')
-                                        <div class="badge badge-warning">Rusak</div>
-                                    @elseif ($item->kondisi === 'Tidak Layak')
-                                        <div class="badge badge-danger">Tidak Layak Pakai</div>
-                                    @else
-                                        <p>Status tidak diketahui</p>
-                                    @endif
-                                    </th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
+    <!-- Modal Tambah-->
+    <div class="modal fade" tabindex="-1" role="dialog" id="tambah">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tambah data Pemeliharaaan
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('pemeliharaan.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Nama Barang</label>
+                                <select name="barang_id" class="form-control @error('barang_id') is-invalid @enderror"
+                                    value="{{ old('barang_id') }}">
+                                    <option>Silakan pilih</option>
+                                    @foreach ($barang as $item)
+                                        <option value="{{ $item->id }}"
+                                            {{ old('barang_id', isset($data) ? $data->barang_id : '') == $item->id ? 'selected' : '' }}>
+                                            {{ $item->nama_barang }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('barang_id')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-        <!-- end Modal detail-->
+    </div>
+    <!-- end Modal Tambah-->
 
+
+    @foreach ($data as $item)
         <!-- Modal Hapus-->
         <div class="modal fade" id="hapus{{ $item->id }}">
             <div class="modal-dialog">
