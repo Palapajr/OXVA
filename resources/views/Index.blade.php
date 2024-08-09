@@ -49,14 +49,11 @@
                 <nav id="navmenu" class="navmenu">
                     <ul>
                         {{-- <li><a href="#hero" class="active">Home<br></a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#team">Team</a></li> --}}
-                        {{-- <li><a href="{{ route('login') }}">Login</a></li>
-            <li><a href="{{ route('register') }}">Register</a></li> --}}
-
-                        {{-- <li><a href="#contact">Contact</a></li> --}}
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#team">Team</a></li>
+                        <li><a href="#contact">Contact</a></li> --}}
                     </ul>
                     <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
                 </nav>
@@ -122,7 +119,7 @@
 
                                     <div class="col-md-12">
                                         <input type="file" class="form-control" name="foto_bukti"
-                                            placeholder="Foto" required="">
+                                            placeholder="Foto" required="" accept="image/*;capture=camera">
                                     </div>
 
                                     <div class="col-md-12">
@@ -145,161 +142,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Modal UNIT IT-->
-            <div class="modal fade" id="exampleModalToggle2" aria-hidden="true"
-                aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5 text-dark" id="exampleModalToggleLabel2">Komplain Ke IT</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="" method="post" class="php-email-form" data-aos="fade"
-                                data-aos-delay="100">
-                                <div class="row gy-4">
-
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control" name="name"
-                                            placeholder="Nama Pelapor" required="">
-                                    </div>
-
-                                    <div class="col-md-6 ">
-                                        <input type="text" class="form-control" name="bidang"
-                                            placeholder="Bidang" required="">
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <textarea class="form-control" name="deskripsi" rows="8" placeholder="Deskrips" required=""></textarea>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <input type="file" class="form-control" name="subject" placeholder="Foto"
-                                            required="">
-                                    </div>
-
-
-                                    <div class="col-md-12 text-center">
-                                        <div class="loading">Loading</div>
-                                        <div class="error-message"></div>
-                                        <div class="sent-message">Your message has been sent. Thank you!</div>
-                                        <button class="btn btn-primary" type="submit">Send Message</button>
-                                    </div>
-
-                                </div>
-                            </form>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modal Sarpras-->
-            <div class="modal fade" id="exampleModalToggle3" aria-hidden="true"
-                aria-labelledby="exampleModalToggleLabel3" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5 text-dark" id="exampleModalToggleLabel2">Komplaint Ke Sarpras
-                            </h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade"
-                                data-aos-delay="100">
-                                <div class="row gy-4">
-
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control" name="name"
-                                            placeholder="Nama Pelapor" required="">
-                                    </div>
-
-                                    <div class="col-md-6 ">
-                                        <input type="text" class="form-control" name="bidang"
-                                            placeholder="Bidang" required="">
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <textarea class="form-control" name="deskripsi" rows="8" placeholder="Deskrips" required=""></textarea>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <input type="file" class="form-control" name="subject" placeholder="Foto"
-                                            required="">
-                                    </div>
-
-
-                                    <div class="col-md-12 text-center">
-                                        <div class="loading">Loading</div>
-                                        <div class="error-message"></div>
-                                        <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                                        <button class="btn btn-primary" type="submit">Send Message</button>
-                                    </div>
-
-                                </div>
-                            </form>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modal ATEM-->
-            <div class="modal fade" id="exampleModalToggle4" aria-hidden="true"
-                aria-labelledby="exampleModalToggleLabel4" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5 text-dark" id="exampleModalToggleLabel2">Komplain Ke ATEM</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade"
-                                data-aos-delay="100">
-                                <div class="row gy-4">
-
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control" name="name"
-                                            placeholder="Nama Pelapor" required="">
-                                    </div>
-
-                                    <div class="col-md-6 ">
-                                        <input type="text" class="form-control" name="bidang"
-                                            placeholder="Bidang" required="">
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <textarea class="form-control" name="deskripsi" rows="8" placeholder="Deskrips" required=""></textarea>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <input type="file" class="form-control" name="subject" placeholder="Foto"
-                                            required="">
-                                    </div>
-
-
-                                    <div class="col-md-12 text-center">
-                                        <div class="loading">Loading</div>
-                                        <div class="error-message"></div>
-                                        <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                                        <button class="btn btn-primary" type="submit">Send Message</button>
-                                    </div>
-
-                                </div>
-                            </form>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!-- end Modal -->
-
 
             <div class="icon-boxes position-relative" data-aos="fade-up" data-aos-delay="200">
                 <div class="container position-relative">
@@ -349,7 +191,7 @@
     </footer>
 
     <!-- Scroll Top -->
-    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center bg-info"><i
             class="bi bi-arrow-up-short"></i></a>
 
     <!-- Preloader -->
