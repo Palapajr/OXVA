@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Satuan;
 use App\Models\Lokasi;
+use App\Models\Pemeliharaan;
 
 class Barang extends Model
 {

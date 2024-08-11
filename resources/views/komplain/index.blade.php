@@ -64,9 +64,9 @@
                                                 <button data-toggle="modal" data-target="#detail{{ $item->id }}"
                                                     class="btn btn-icon btn-info"><i
                                                         class="fa fa-regular fa-eye"></i></button>
-                                                {{-- <button class="btn btn-icon btn-danger" data-toggle="modal"
+                                                <button class="btn btn-icon btn-danger" data-toggle="modal"
                                                     data-target="#hapus{{ $item->id }}"><i
-                                                        class="fa fa-solid fa-trash"></i></button> --}}
+                                                        class="fa fa-solid fa-trash"></i></button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -154,6 +154,36 @@
             </div>
         </div>
         <!-- end Modal detail-->
+    @endforeach
+
+    @foreach ($komplains as $item)
+        <!-- Modal Hapus-->
+        <div class="modal fade" id="hapus{{ $item->id }}">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Confirmation</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Apakah anda yakin menghapus data -> <b>{{ $item->nama_pelapor }} ?</b> </p>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <form action="{{ route('komplain.destroy', $item->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-danger">Delete Data</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- end Modal Hapus-->
     @endforeach
 @endsection
 

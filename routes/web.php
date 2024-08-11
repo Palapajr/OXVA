@@ -6,6 +6,7 @@ use \App\Http\Controllers\PegawaiController;
 use \App\Http\Controllers\BarangController;
 use \App\Http\Controllers\JabaatanController;
 use App\Http\Controllers\KomplainController;
+use App\Http\Controllers\LoginController;
 use \App\Http\Controllers\SatuanController;
 use  \App\Http\Controllers\LokasiController;
 use \App\Http\Controllers\PemeliharaanController;
@@ -24,36 +25,42 @@ use \App\Http\Controllers\PemeliharaanController;
 //     return view('dashboard');
 // });
 
-Route::get('/dashboard', [DashboardController::class, 'index']);
-
-Route::resource('/pegawai', PegawaiController::class);
-Route::resource('/barang', BarangController::class);
-Route::resource('/jabatan', JabaatanController::class);
-Route::resource('/satuan', SatuanController::class);
-Route::resource('/lokasi', LokasiController::class);
-Route::resource('/pemeliharaan', PemeliharaanController::class);
 
 
-// Route::get('/komplain', [KomplainController::class, 'index']);
-// Route::resource('/komplain', KomplainController::class);
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/proseslogin', [LoginController::class, 'proseslogin',])->name('proseslogin');
+Route::get('/logout', [LoginController::class, 'logout',])->name('logout');
 
 // Routes untuk User
 Route::get('/', [KomplainController::class, 'createUser'])->name('komplain.createUser');
 Route::post('/komplain/storeuser', [KomplainController::class, 'storeuser'])->name('komplain.storeuser');
-// Route::get('/komplain/indexProses', [KomplainController::class, 'indexProses'])->name('komplain.indexProses');
+
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 
 
-Route::get('/komplain', [KomplainController::class, 'index'])->name('komplain.index');
-Route::get('/komplain/proses', [KomplainController::class, 'indexProses'])->name('komplain.indexProses');
-Route::get('/komplain/sedang-proses', [KomplainController::class, 'indexSedangProses'])->name('komplain.indexSedangProses');
-Route::get('/komplain/selesai', [KomplainController::class, 'indexSelesai'])->name('komplain.indexSelesai');
+    Route::resource('/pegawai', PegawaiController::class);
+    Route::resource('/barang', BarangController::class);
+    Route::resource('/jabatan', JabaatanController::class);
+    Route::resource('/satuan', SatuanController::class);
+    Route::resource('/lokasi', LokasiController::class);
+    Route::resource('/pemeliharaan', PemeliharaanController::class);
+    Route::post('pemeliharaan/{id}/close', [PemeliharaanController::class, 'close'])->name('pemeliharaan.close');
+
+    Route::get('/komplain', [KomplainController::class, 'index'])->name('komplain.index');
+    Route::get('/komplain/proses', [KomplainController::class, 'indexProses'])->name('komplain.indexProses');
+    Route::get('/komplain/sedang-proses', [KomplainController::class, 'indexSedangProses'])->name('komplain.indexSedangProses');
+    Route::get('/komplain/selesai', [KomplainController::class, 'indexSelesai'])->name('komplain.indexSelesai');
+    Route::delete('komplain/{id}', [KomplainController::class, 'destroy'])->name('komplain.destroy');
+
+    Route::post('/komplain/{id}/sedang-diproses', [KomplainController::class, 'updateSedangDiproses'])->name('komplain.updateSedangDiproses');
+    Route::post('/komplain/{id}/selesai', [KomplainController::class, 'updateSelesai'])->name('komplain.updateSelesai');
+});
 
 
-// Route untuk mengubah status menjadi "sedang diproses"
-// Route::get('/komplain/{id}/sedang-diproses', [KomplainController::class, 'editSedangDiproses'])->name('komplain.editSedangDiproses');
-Route::post('/komplain/{id}/sedang-diproses', [KomplainController::class, 'updateSedangDiproses'])->name('komplain.updateSedangDiproses');
 
-// Route untuk mengubah status menjadi "selesai"
-// Route::get('/komplain/{id}/selesai', [KomplainController::class, 'editSelesai'])->name('komplain.editSelesai');
-Route::post('/komplain/{id}/selesai', [KomplainController::class, 'updateSelesai'])->name('komplain.updateSelesai');
+
+
+

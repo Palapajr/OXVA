@@ -14,10 +14,10 @@
     <div class="section-header">
         <h1>@yield('title')</h1>
         <div class="section-header-breadcrumb">
-            <button class="btn btn-icon icon-left btn-primary" data-toggle="modal" data-target="#tambah"><i
+            <a href="{{ route('pemeliharaan.create') }}" class="btn btn-icon icon-left btn-primary"><i
                     class="fa fa-solid fa-plus"></i>
                 Tambah Data
-            </button>
+            </a>
         </div>
     </div>
 
@@ -36,6 +36,7 @@
                                         <th>Tgl Perbaikan</th>
                                         <th>Waktu Perbaikan</th>
                                         <th>Status</th>
+                                        <th>Ubah Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -56,13 +57,21 @@
                                                     <p>Status tidak diketahui</p>
                                                 @endif
                                             </td>
+                                            <td>
+                                                <form action="{{ route('pemeliharaan.close', $item->id) }}" method="POST" style="display:inline;">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-success" {{ $item->status != 'Waiting' ? 'disabled' : '' }}>
+                                                        Ubah ke Closed
+                                                    </button>
+                                                </form>
+                                            </td>
                                             {{-- <td>{{ $item->jabatan->nama_jabatan }}</td> --}}
                                             <td>
                                                 {{-- <a href="{{ route('pegawai.show', $item->id) }}" class="btn btn-icon btn-info"><i class="fa fa-solid fa-eye"></i></a> --}}
                                                 <button class="btn btn-icon btn-info" data-toggle="modal"
                                                     data-target="#detail{{ $item->id }}"><i
                                                         class="fa fa-solid fa-eye"></i></button>
-                                                <a href="{{ route('barang.edit', $item->id) }}"
+                                                <a href="{{ route('pemeliharaan.edit', $item->id) }}"
                                                     class="btn btn-icon btn-warning"><i
                                                         class="fa fa-regular fa-pen"></i></a>
                                                 <button class="btn btn-icon btn-danger" data-toggle="modal"
@@ -86,50 +95,79 @@
 @endsection
 @section('modal')
 
-    <!-- Modal Tambah-->
-    <div class="modal fade" tabindex="-1" role="dialog" id="tambah">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Tambah data Pemeliharaaan
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{ route('pemeliharaan.store') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label>Nama Barang</label>
-                                <select name="barang_id" class="form-control @error('barang_id') is-invalid @enderror"
-                                    value="{{ old('barang_id') }}">
-                                    <option>Silakan pilih</option>
-                                    @foreach ($barang as $item)
-                                        <option value="{{ $item->id }}"
-                                            {{ old('barang_id', isset($data) ? $data->barang_id : '') == $item->id ? 'selected' : '' }}>
-                                            {{ $item->nama_barang }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('barang_id')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </form>
+           <!-- Modal detail-->
+           <div class="modal fade" tabindex="-1" role="dialog" id="detail{{ $item->id }}">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Detail data Saudara <strong class="text-info">{{ $item->nama }}</strong>
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Kode Barang</th>
+                                    <th scope="row"><strong>{{ $item->barang->nama_barang }}</strong></th>
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nama Barang</th>
+                                    <th scope="row"><strong>{{ date('d-M-Y', strtotime($item->tgl_perbaikan)) }}</strong></th>
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Type/Merk</th>
+                                    <th scope="row"><strong>{{ $item->jam_perbaikan }}</strong></th>
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Tanggal Beli</th>
+                                    <th scope="row">
+                                        <strong>{{ $item->lokasi->nama_lokasi }}</strong>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Satuan Barang</th>
+                                    <th scope="row"><strong>{{ $item->deskripsi}}</strong></th>
+
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Pegawai yang Memelihara</th>
+                                    <th scope="row"><strong>{{ $item->pegawai->nama }}</strong></th>
+                                </tr>
+                            </thead>
+
+                            <thead>
+                                <tr>
+                                    <th scope="col">Kondisi</th>
+                                    <th scope="row">
+                                        @if ($item->status === 'Closed')
+                                        <div class="badge badge-success">Closed</div>
+                                    @elseif ($item->status === 'Waiting')
+                                        <div class="badge badge-warning">Waiting</div>
+                                    @else
+                                        <p>Status tidak diketahui</p>
+                                    @endif
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- end Modal Tambah-->
+        <!-- end Modal detail-->
 
 
     @foreach ($data as $item)
@@ -144,10 +182,10 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>Apakah anda yakin menghapus data -> <b>{{ $item->nama_barang }} ?</b> </p>
+                        <p>Apakah anda yakin menghapus data -> <b>{{ $item->barang->nama_barang }} ?</b> </p>
                     </div>
                     <div class="modal-footer justify-content-between">
-                        <form action="{{ route('barang.destroy', $item->id) }}" method="POST">
+                        <form action="{{ route('pemeliharaan.destroy', $item->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

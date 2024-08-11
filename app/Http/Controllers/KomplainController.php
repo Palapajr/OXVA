@@ -22,7 +22,7 @@ class KomplainController extends Controller
             'nama_pelapor' => 'required',
             'bidang' => 'required',
             'deskripsi' => 'required',
-            'foto_bukti' => 'image|nullable|max:2024',
+            'foto_bukti' => 'image|nullable',
             'typeKomplain' => 'required'
             // 'status_transaksi' => 'required'
         ]);
