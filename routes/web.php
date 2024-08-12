@@ -29,7 +29,6 @@ use \App\Http\Controllers\PemeliharaanController;
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/proseslogin', [LoginController::class, 'proseslogin',])->name('proseslogin');
-Route::get('/logout', [LoginController::class, 'logout',])->name('logout');
 
 // Routes untuk User
 Route::get('/', [KomplainController::class, 'createUser'])->name('komplain.createUser');
@@ -38,8 +37,6 @@ Route::post('/komplain/storeuser', [KomplainController::class, 'storeuser'])->na
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-
 
     Route::resource('/pegawai', PegawaiController::class);
     Route::resource('/barang', BarangController::class);
@@ -57,6 +54,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('/komplain/{id}/sedang-diproses', [KomplainController::class, 'updateSedangDiproses'])->name('komplain.updateSedangDiproses');
     Route::post('/komplain/{id}/selesai', [KomplainController::class, 'updateSelesai'])->name('komplain.updateSelesai');
+
+
+    Route::get('/logout', [LoginController::class, 'logout',])->name('logout');
 });
 
 

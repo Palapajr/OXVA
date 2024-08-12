@@ -21,7 +21,7 @@
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
-                            <h4>Total Admin</h4>
+                            <h4>Total Pegawai</h4>
                         </div>
                         <div class="card-body">
                             {{ $jml_pegawai }}
@@ -36,7 +36,7 @@
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
-                            <h4>News</h4>
+                            <h4>Total Barang</h4>
                         </div>
                         <div class="card-body">
                             42
@@ -51,7 +51,7 @@
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
-                            <h4>Reports</h4>
+                            <h4>Total Komplenan</h4>
                         </div>
                         <div class="card-body">
                             1,201
