@@ -94,13 +94,13 @@
 
 @endsection
 @section('modal')
-
+    @foreach ($data as $item)
            <!-- Modal detail-->
            <div class="modal fade" tabindex="-1" role="dialog" id="detail{{ $item->id }}">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Detail data Saudara <strong class="text-info">{{ $item->nama }}</strong>
+                        <h5 class="modal-title">Detail <strong class="text-info">{{ $item->barang->nama_barang }}</strong>
                         </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -168,7 +168,7 @@
             </div>
         </div>
         <!-- end Modal detail-->
-
+        @endforeach
 
     @foreach ($data as $item)
         <!-- Modal Hapus-->

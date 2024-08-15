@@ -32,35 +32,92 @@
             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                 <div class="card card-statistic-1">
                     <div class="card-icon bg-danger">
-                        <i class="far fa-newspaper"></i>
+                        <i class="fas fa-layer-group"></i>
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
                             <h4>Total Barang</h4>
                         </div>
                         <div class="card-body">
-                            42
+                            {{ $jml_barang }}
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                 <div class="card card-statistic-1">
-                    <div class="card-icon bg-warning">
-                        <i class="far fa-file"></i>
+                    <div class="card-icon bg-dark">
+                        <i class="fas fa-wrench"></i>
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
-                            <h4>Total Komplenan</h4>
+                            <h4>Total Pemeliharaan</h4>
                         </div>
                         <div class="card-body">
-                            1,201
+                            {{ $jml_pemeliharaan }}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
+    </div>
+    <div class="section-body">
+        <div class="card col-lg-6">
+            <div class="card-header">
+                <h4>Total Komplainan</h4>
+            </div>
+                <div class="card-body">
+                    <div class="row pb-2">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                            <div class="card card-statistic-1">
+                                <div class="card-icon bg-secondary">
+                                    <i class="fas fa-comments"></i></i>
+                                </div>
+                                <div class="card-wrap">
+                                    <div class="card-header">
+                                        <h4>Proses</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        {{ $proses }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                            <div class="card card-statistic-1">
+                                <div class="card-icon bg-info">
+                                    <i class="fas fa-comments"></i></i>
+                                </div>
+                                <div class="card-wrap">
+                                    <div class="card-header">
+                                        <h4>Sedang Proses</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        {{ $sedangproses }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row pb-2">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                            <div class="card card-statistic-1">
+                                <div class="card-icon bg-success">
+                                    <i class="fas fa-comments"></i></i>
+                                </div>
+                                <div class="card-wrap">
+                                    <div class="card-header">
+                                        <h4>Selesai</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        {{ $selesai }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
     </div>
 
 
